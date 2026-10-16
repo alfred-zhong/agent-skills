@@ -26,6 +26,12 @@ npx skills remove route-cp
 | Skill | 用途 |
 |---|---|
 | [`route-cp`](skills/route-cp/SKILL.md) | 给轨迹（KML / GPX）按地形标 CP 点并导出带 `<wpt>` 的 GPX |
+| [`export-html`](skills/export-html/SKILL.md) | markdown / 纯文本 → 自包含单文件 HTML |
+| [`officecli`](skills/officecli/SKILL.md) | 用 officecli CLI 读写 .docx / .xlsx / .pptx |
+| [`orbstack-helper`](skills/orbstack-helper/SKILL.md) | OrbStack Linux 虚拟机（`orb` / `orbctl`）的创建与运维 |
+| [`wolai-mcp-helper`](skills/wolai-mcp-helper/SKILL.md) | wolai MCP 工具的选型与工作流手册 |
+
+> `export-html` / `officecli` / `orbstack-helper` / `wolai-mcp-helper` 于 2026-10-16 从内部技能仓整体迁入，内容保持原样未改写（含少量 `/Users/alfred/...` 绝对路径）。
 
 ## 仓库约定
 

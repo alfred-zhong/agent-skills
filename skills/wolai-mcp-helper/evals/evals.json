@@ -1,0 +1,41 @@
+{
+  "skill_name": "wolai-mcp-helper",
+  "version": "v2",
+  "evals": [
+    {
+      "id": 1,
+      "name": "workflow-create-new-page",
+      "prompt": "我要在 wolai 工作空间根目录下创建一个名为 'Q1 复盘' 的新页面，标题用 emoji 🚀 图标。请列出完整的工作流（按顺序调哪些 wolai MCP 工具，参数是什么）。",
+      "expected_output": "工作流应包含：1) list_pages 或直接用已知 parent_id（工作空间 ID）；2) create_page(parent_id, title='Q1 复盘') 拿到新页面 ID；3) update_page(page_id, icon={type:'emoji', icon:'🚀'})。注意：先调 create_page 创建空页面，**不需要**加内容（用户没要求）。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "section-vs-block-decision",
+      "prompt": "用户说：'把'安装说明'那一节的内容替换成新的版本'。已知有 wolai-mcp-helper 技能。请用正确的工作流：应该用什么工具？先做什么再做什么？",
+      "expected_output": "应该用 rewrite_section（章节级工具，§2 优先级 1），不是 create_block 逐块拼。完整流程：1) get_page_outline(page_id) 拿到 section_id；2)（推荐）get_section_content 读当前内容；3) rewrite_section(page_id, section_id, blocks=[新内容])。**不要**用 create_block + 手动删除旧 block 这种缝合方案。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "tool-selection-cascading",
+      "prompt": "我需要：1) 把某页面第二个标题下的'注意事项'段落改成红色背景；2) 在第三个标题下补充一个有序列表；3) 删除最后一个标题下的所有内容但保留标题。请按工具优先级（§2 4 级）列出每个任务应该用哪个工具。",
+      "expected_output": "1) 改一个块的属性 → update_block（§2 优先级 2，局部修补），不用 rewrite_section；2) 标题下补充 → insert_under_heading（§2 优先级 1，章节级首选），不用 create_block；3) 删内容保留标题 → delete_section(page_id, section_id, preserve_heading=true)（§2 优先级 1，章节级首选），不用 delete_block 逐个删。",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "reading-hierarchy",
+      "prompt": "我想知道一个 wolai 页面里有哪些标题章节，以及每个章节的大致内容。应该调哪些工具？**不要**用什么工具？为什么？",
+      "expected_output": "应该：1) get_page_outline（拿轻量结构索引，token 省）；2) 如果要具体内容，对感兴趣的 section 调 get_section_content。**不要**用 get_page_blocks 全量 dump（§2 优先级 4 明确说避免，token 消耗大；§3.2 说'仅在必须获取所有 block_id 列表时用'）。get_page 带 include_blocks=true 也同理（§3.1 说'不要用 include_blocks=true 读内容'）。",
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "create-block-content-format",
+      "prompt": "我要创建一个普通文本段落，内容是：'请先运行 `npm install`，**注意**版本要求'，其中 npm install 是行内代码，注意 是粗体。给我 create_block 的 JSON。",
+      "expected_output": "应使用 content 富文本数组形态：{\"type\": \"text\", \"content\": [\"请先运行 \", {\"type\":\"text\", \"title\":\"npm install\", \"inline_code\": true}, \"，\", {\"type\":\"text\", \"title\":\"注意\", \"bold\": true}, \"版本要求\"]}。参考 §5.2 content 字段格式。注意：富文本元素的 type 字段在创建块时只支持 text 和 equation（v1 trap 不再适用，v2 简化为 inline_code + bold 即可）。",
+      "files": []
+    }
+  ]
+}
