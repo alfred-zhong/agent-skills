@@ -1,4 +1,4 @@
-# skills
+# agent-skills
 
 个人 agent skills 集合。每个子目录是一个独立 skill：`SKILL.md` 是入口，`scripts/` 放可执行脚本。
 
@@ -7,9 +7,9 @@
 用 [vercel-labs/skills](https://github.com/vercel-labs/skills) 的 CLI 安装：
 
 ```bash
-npx skills add alfred-zhong/skills --list                 # 先看仓库里有哪些
-npx skills add alfred-zhong/skills -g -a kimi-code-cli -y # 装到 ~/.agents/skills/
-npx skills add alfred-zhong/skills --skill route-cp -g    # 只装一个
+npx skills add alfred-zhong/agent-skills --list                 # 先看仓库里有哪些
+npx skills add alfred-zhong/agent-skills -g -a kimi-code-cli -y # 装到 ~/.agents/skills/
+npx skills add alfred-zhong/agent-skills --skill route-cp -g    # 只装一个
 ```
 
 `-g` 装到用户级（全局可用），不带则装到当前项目的 `.agents/skills/`。装完需要**新开一个会话**才会被加载。
