@@ -30,8 +30,11 @@ npx skills remove route-cp
 | [`officecli`](skills/officecli/SKILL.md) | 用 officecli CLI 读写 .docx / .xlsx / .pptx |
 | [`orbstack-helper`](skills/orbstack-helper/SKILL.md) | OrbStack Linux 虚拟机（`orb` / `orbctl`）的创建与运维 |
 | [`wolai-mcp-helper`](skills/wolai-mcp-helper/SKILL.md) | wolai MCP 工具的选型与工作流手册 |
+| [`answer-me-with-html`](skills/answer-me-with-html/SKILL.md) | 把回答渲染成单页可视化 HTML（含架构图 / 流程图 / 视频），产物落在系统临时目录 |
 
 > `export-html` / `officecli` / `orbstack-helper` / `wolai-mcp-helper` 于 2026-10-16 从内部技能仓整体迁入，内容保持原样未改写（含少量 `/Users/alfred/...` 绝对路径）。
+
+> `answer-me-with-html` 于 2026-10-20 从上游 [QingYunA/answer-me-with-html](https://github.com/QingYunA/answer-me-with-html) v0.5.5（MIT）移植：CLI 原样 vendored 在 `scripts/vendor/am-cli.mjs`，`scripts/am.mjs` 只是启动器，把上游默认的 `~/.answer-me-with-html` 数据目录改到 `$TMPDIR/answer-me-with-html/<uid>/`，并关闭会自动指向上游的版本检查。要升级上游 CLI，替换 `scripts/vendor/am-cli.mjs` 并同步 `SKILL.md` / `references/` 即可；字体许可 `licenses/OFL-Bangers.txt` 随技能保留。
 
 ## 仓库约定
 
